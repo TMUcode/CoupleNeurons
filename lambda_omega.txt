@@ -1,0 +1,21 @@
+# The following script simulates a lambda-omega oscillator in the deterministic regime, 
+# the canonical model for a normal form near Hopf bifurcation
+
+# Initial conditions (arb.)
+init x = 0.01 y = 0.02
+
+# Parameters
+par lambda = -0.03  # control parameter
+    alpha = -0.2    
+    gamma = -0.2    
+    omega0 = 2      # Natural frequency
+    omega1 = 1      # Nonlinear frequency
+
+# Model equations
+dx/dt = (lambda + alpha * r^2 + gamma * r^4) * x - (omega0 + omega1 * r^2) * y
+dy/dt = (omega0 + omega1 * r^2) * x + (lambda + alpha * r^2 + gamma * r^4) * y
+
+# Where r is defined
+r = (x^2 + y^2)^0.5  # amplitude of oscillation 
+
+done

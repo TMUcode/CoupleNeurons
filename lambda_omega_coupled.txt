@@ -1,0 +1,31 @@
+# The following script simulates two coupled lambda-omega oscillators in the deterministic regime, 
+# the canonical model for a normal form near Hopf bifurcation (coupled)
+
+# Initial conditions (arb.)
+init x1 = 0.01 y1 = 0.02 x2 = 0.011 y2 = 0.021
+
+# Parameters
+par lambda = -0.03  # Control parameter
+    alpha = -0.2   
+    gamma = -0.2    
+    omega0 = 2      # Natural frequency
+    omega1 = 1      # Nonlinear frequency
+    d = 0.6         # Coupling strength
+
+# Model equations
+#Osc. 1
+dx1/dt = (lambda + alpha * r1^2 + gamma * r1^4) * x1 - (omega0 + omega1 * r1^2) * y1 + d * (x2 - x1)
+dy1/dt = (omega0 + omega1 * r1^2) * x1 + (lambda + alpha * r1^2 + gamma * r1^4) * y1
+#Osc. 2
+dx2/dt = (lambda + alpha * r2^2 + gamma * r2^4) * x2 - (omega0 + omega1 * r2^2) * y2 + d * (x1 - x2)
+dy2/dt = (omega0 + omega1 * r2^2) * x2 + (lambda + alpha * r2^2 + gamma * r2^4) * y2
+
+# Where r1 and r2 are defined
+r1 = (x1^2 + y1^2)^0.5  # Amplitude of first oscillator
+r2 = (x2^2 + y2^2)^0.5  # Amplitude of second oscillator 
+
+# Track the following variables
+aux r1 = (x1^2 + y1^2)^0.5  # Track the amplitude of the first oscillator
+aux r2 = (x2^2 + y2^2)^0.5  # Track the amplitude of the second oscillator
+
+done
